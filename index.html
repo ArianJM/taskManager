@@ -15,12 +15,33 @@
   <script type="text/javascript">
   // Your Client ID can be retrieved from your project in the Google
   // Developer Console, https://console.developers.google.com
-  var CLIENT_ID = '620760987090-ncpthf64vkca54210079fvlebpi2jep9.apps.googleusercontent.com';
+  var clientId = '620760987090-ncpthf64vkca54210079fvlebpi2jep9.apps.googleusercontent.com';
+  var apiKey = 'AIzaSyDRUtCdJkJ3ARwzSfmpVxyH_0XUxAKxX8g'
+  var scope = 'https://www.googleapis.com/auth/drive.readonly';  // View the files in your Google Drive
 
-  var SCOPES = [ 'https://www.googleapis.com/auth/drive.readonly' ];  // View the files in your Google Drive
   var accessToken = '';
 
-  gapi.load('auth2', init);
+  function initAuth() {
+    gapi.client.setApiKey(apiKey);
+    gapi.auth2.init({
+        client_id: clientId,
+        scope: scope
+    }).then(function () {
+      // Listen for sign-in state changes.
+      gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+      signinButton.addEventListener("click", handleSigninClick);
+    });
+  }
+
+  // Get authorization from the user to access profile info
+  function handleSigninClick(event) {
+    gapi.auth2.getAuthInstance().signIn().then(function() {
+      makeApiCall();
+    });
+  }
+
+  gapi.load('auth2', initAuth);
 
   /**
   * Get file
