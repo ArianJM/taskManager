@@ -69,16 +69,16 @@
   * Get file
   */
   function getFile(id='1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
-    varxhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open('GET', `https://www.googleapis.com/drive/v3/files/${id}/export`);
     xhr.setRequestHeader('Authorization', 'Bearer ', accessToken);
-    xhr.send();
     xhr.onerror = function() {
       $('#output').html('Ups: parece que se ha producido un error');
     };
     xhr.onload = function() {
       $('#output').html(`Todo bien:\n${xhr.responseText}`);
     };
+    xhr.send();
 
     // gapi.client.drive.files.export({ 'fileId': id, 'mimeType': 'text/csv' }).then(function(resp) {
     //   console.log(resp.result);
