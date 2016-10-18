@@ -15,7 +15,10 @@
   // Developer Console, https://console.developers.google.com
   var CLIENT_ID = '620760987090-ncpthf64vkca54210079fvlebpi2jep9.apps.googleusercontent.com';
 
-  var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+  var SCOPES = [ 'https://www.googleapis.com/auth/drive', // View and manage the files in your Google Drive
+                 'https://www.googleapis.com/auth/drive.metadata.readonly', // View metadata for files in your Google Drive
+                 'https://www.googleapis.com/auth/drive.file',  // View and manage Google Drive files and folders that you have opened or created with this app
+                 'https://www.googleapis.com/auth/drive.readonly' ];  // View the files in your Google Drive
 
   /**
   * Check if current user has authorized this application.
