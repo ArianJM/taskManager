@@ -67,7 +67,7 @@
   * Get file
   */
   function getFile(id='1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
-    var request = gapi.client.drive.files.export({ 'fileId': id, 'mimeType': 'text/csv' }).then(function(resp) {
+    gapi.client.drive.files.export({ 'fileId': id, 'mimeType': 'text/csv' }).then(function(resp) {
       console.log(resp.result);
     }, function(reason) {
       console.log('Error: ' + reason.result.error.message);
