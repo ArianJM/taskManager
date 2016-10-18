@@ -75,9 +75,10 @@
     function getFile(id='1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
       var user = gapi.auth2.getAuthInstance().currentUser.get();
       var oauthToken = user.getAuthResponse().access_token;
+      var requestUrl = 'https://www.googleapis.com/drive/v3/files/' + id + '/export?mimeType=text/csv&access_token=' + oauthToken
+
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'https://www.googleapis.com/drive/v3/files/' + id + '/export?mimeType=text/csv');
-      xhr.setRequestHeader('Authorization', 'Bearer ', oauthToken);
+      xhr.open('GET', requestUrl);
       xhr.onerror = function() {
         $('#output').html('Ups: parece que se ha producido un error');
       };
