@@ -77,7 +77,7 @@
       var oauthToken = user.getAuthResponse().access_token;
       var xhr = new XMLHttpRequest();
       xhr.open('GET', `https://www.googleapis.com/drive/v3/files/${id}/export?mimeType="text/csv"`);
-      xhr.setRequestHeader('Authorization', 'Bearer ', oauthToken.accessToken);
+      xhr.setRequestHeader('Authorization', 'Bearer ', oauthToken);
       xhr.onerror = function() {
         $('#output').html('Ups: parece que se ha producido un error');
       };
