@@ -16,6 +16,7 @@
   var CLIENT_ID = '620760987090-ncpthf64vkca54210079fvlebpi2jep9.apps.googleusercontent.com';
 
   var SCOPES = [ 'https://www.googleapis.com/auth/drive.readonly' ];  // View the files in your Google Drive
+  var accessToken = '';
 
   /**
   * Check if current user has authorized this application.
@@ -38,6 +39,7 @@
     if (authResult && !authResult.error) {
       // Hide auth UI, then load client library.
       authorizeDiv.style.display = 'none';
+      accessToken = authResult.access_token;
       loadDriveApi();
     } else {
       // Show auth UI, allowing the user to initiate authorization by
@@ -67,46 +69,22 @@
   * Get file
   */
   function getFile(id='1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
-    gapi.client.drive.files.export({ 'fileId': id, 'mimeType': 'text/csv' }).then(function(resp) {
-      console.log(resp.result);
-    }, function(reason) {
-      console.log('Error: ' + reason.result.error.message);
-    });
-}
+    varxhr = new XMLHttpRequest();
+    xhr.open('GET', `https://www.googleapis.com/drive/v3/files/${id}/export`);
+    xhr.setRequestHeader('Authorization', 'Bearer ', accessToken);
+    xhr.send();
+    xhr.onerror = function() {
+      $('#output').html('Ups: parece que se ha producido un error');
+    };
+    xhr.onload = function() {
+      $('#output').html(`Todo bien:\n${xhr.responseText}`);
+    };
 
-  /**
-  * Print files.
-  */
-  function listFiles() {
-    var request = gapi.client.drive.files.list({
-      'pageSize': 10,
-      'fields': "nextPageToken, files(id, name)"
-    });
-
-    request.execute(function(resp) {
-      appendPre('Files:');
-      var files = resp.files;
-      if (files && files.length > 0) {
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          appendPre(file.name + ' (' + file.id + ')');
-        }
-      } else {
-        appendPre('No files found.');
-      }
-    });
-  }
-
-  /**
-  * Append a pre element to the body containing the given message
-  * as its text node.
-  *
-  * @param {string} message Text to be placed in pre element.
-  */
-  function appendPre(message) {
-    var pre = document.getElementById('output');
-    var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
+    // gapi.client.drive.files.export({ 'fileId': id, 'mimeType': 'text/csv' }).then(function(resp) {
+    //   console.log(resp.result);
+    // }, function(reason) {
+    //   console.log('Error: ' + reason.result.error.message);
+    // });
   }
 
   </script>
