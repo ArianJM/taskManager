@@ -71,7 +71,7 @@
   */
   function getFile(id='1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', `https://www.googleapis.com/drive/v3/files/${id}/export`);
+    xhr.open('GET', `https://www.googleapis.com/drive/v3/files/${id}/export?mimeType="text/csv"`);
     xhr.setRequestHeader('Authorization', 'Bearer ', accessToken);
     xhr.onerror = function() {
       $('#output').html('Ups: parece que se ha producido un error');
