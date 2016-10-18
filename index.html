@@ -15,10 +15,7 @@
   // Developer Console, https://console.developers.google.com
   var CLIENT_ID = '620760987090-ncpthf64vkca54210079fvlebpi2jep9.apps.googleusercontent.com';
 
-  var SCOPES = [ 'https://www.googleapis.com/auth/drive', // View and manage the files in your Google Drive
-                 'https://www.googleapis.com/auth/drive.metadata.readonly', // View metadata for files in your Google Drive
-                 'https://www.googleapis.com/auth/drive.file',  // View and manage Google Drive files and folders that you have opened or created with this app
-                 'https://www.googleapis.com/auth/drive.readonly' ];  // View the files in your Google Drive
+  var SCOPES = [ 'https://www.googleapis.com/auth/drive.readonly' ];  // View the files in your Google Drive
 
   /**
   * Check if current user has authorized this application.
@@ -70,13 +67,12 @@
   * Get file
   */
   function getFile(id='1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
-    var request = gapi.client.drive.files.export({ 'fileId': id, 'mimeType': 'text/csv' });
-
-    request.execute(function(resp) {
-      appendPre(resp);
+    var request = gapi.client.drive.files.export({ 'fileId': id, 'mimeType': 'text/csv' }).then(function(resp) {
+      console.log(resp.result);
+    }, function(reason) {
+      console.log('Error: ' + reason.result.error.message);
     });
-  }
-
+}
 
   /**
   * Print files.
