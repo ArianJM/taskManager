@@ -19,7 +19,8 @@
   var apiKey = 'AIzaSyDRUtCdJkJ3ARwzSfmpVxyH_0XUxAKxX8g'
   var scope = 'https://www.googleapis.com/auth/drive.readonly';  // View the files in your Google Drive
 
-  var accessToken = '';
+  var signinButton = document.getElementById('signin-button');
+  var signoutButton = document.getElementById('signout-button');
 
   function initAuth() {
     gapi.client.setApiKey(apiKey);
@@ -30,8 +31,31 @@
       // Listen for sign-in state changes.
       gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
+      // Handle the initial sign-in state.
+      updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
       signinButton.addEventListener("click", handleSigninClick);
+      signoutButton.addEventListener("click", handleSignoutClick);
     });
+  }
+
+  function updateSigninStatus(isSignedIn) {
+    if (isSignedIn) {
+      signinButton.style.display = 'none';
+      signoutButton.style.display = 'block';
+      getFile();
+    } else {
+      signinButton.style.display = 'block';
+      signoutButton.style.display = 'none';
+    }
+  }
+
+  function handleSigninClick(event) {
+    gapi.auth2.getAuthInstance().signIn();
+  }
+
+  function handleSignoutClick(event) {
+    gapi.auth2.getAuthInstance().signOut();
   }
 
   // Get authorization from the user to access profile info
@@ -40,8 +64,6 @@
       makeApiCall();
     });
   }
-
-  gapi.load('auth2', initAuth);
 
   /**
   * Get file
@@ -61,6 +83,7 @@
     xhr.send();
   }
 
+  gapi.load('auth2', initAuth);
   </script>
 </head>
 
@@ -79,9 +102,8 @@
     <div id="authorize-div" style="display: none">
       <span>Authorize access to Drive API</span>
       <!--Button for the user to click to initiate auth sequence -->
-      <button id="authorize-button" onclick="handleAuthClick(event)">
-        Authorize
-      </button>
+      <button id="signin-button" onclick="handleSigninClick(event)">Sign in</button>
+      <button id="signout-button" onclick="handleSigninClick(event)">Sign out</button>
     </div>
     <pre id="output"></pre>
 
