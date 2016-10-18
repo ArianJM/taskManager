@@ -27,6 +27,9 @@
     var signoutButton = document.getElementById('signout-button');
 
     function initAuth() {
+      signinButton = document.getElementById('signin-button');
+      signoutButton = document.getElementById('signout-button');
+
       gapi.client.setApiKey(apiKey);
       gapi.auth2.init({
         client_id: clientId,
