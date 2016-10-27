@@ -42,13 +42,13 @@ function getFile(id = '1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
 */
 function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
-        $signinButton.style.display = 'none';
-        $signoutButton.style.display = 'block';
+        $signinButton.hide();
+        $signoutButton.show();
         getFile();
     }
     else {
-        $signinButton.style.display = 'block';
-        $signoutButton.style.display = 'none';
+        $signinButton.show();
+        $signoutButton.hide();
     }
 }
 
