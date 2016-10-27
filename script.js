@@ -58,8 +58,8 @@ function updateSigninStatus(isSignedIn) {
     @return {void}
 */
 function initAuth() {
-    $signinButton = $('signin-button');
-    $signoutButton = $('signout-button');
+    $signinButton = $('#signin-button');
+    $signoutButton = $('#signout-button');
     gapi.client.setApiKey(apiKey);
     gapi.auth2.init({
         client_id: clientId,        // eslint-disable-line camelcase
