@@ -69,17 +69,18 @@ function initAuth() {
 
         // Handle the initial sign-in state.
         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
-        $signinButton.click(() => {
-            gapi.auth2.getAuthInstance().signIn().then(() => {
-                getFile();
-                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-            });
-        });
-        $signoutButton.click(() => {
-            gapi.auth2.getAuthInstance().signOut().then(() => updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()));
-        });
     });
 }
+
+$signinButton.click(() => {
+    gapi.auth2.getAuthInstance().signIn().then(() => {
+        getFile();
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    });
+});
+
+$signoutButton.click(() => {
+    gapi.auth2.getAuthInstance().signOut().then(() => updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()));
+});
 
 gapi.load('auth2', initAuth);
