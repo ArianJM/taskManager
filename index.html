@@ -13,10 +13,10 @@
     <!-- Google Authorization -->
     <script src="https://apis.google.com/js/api.js" type="text/javascript"></script>
     <script src="https://apis.google.com/js/client.js"></script>
-    <script src="script.js" type="text/javascript"></script>
 </head>
 
 <body>
+    <script src="script.js" type="text/javascript"></script>
     <section class="page-header">
         <h1 class="project-name">Taskmanager</h1>
         <h2 class="project-tagline">Manages tasks</h2>
@@ -28,8 +28,8 @@
         <div id="authorize-div">
             <span>Authorize access to Drive API</span>
             <!--Button for the user to click to initiate auth sequence -->
-            <button id="signin-button" onclick="handleSigninClick(event)">Sign in</button>
-            <button id="signout-button" onclick="handleSignoutClick(event)">Sign out</button>
+            <button id="signin-button">Sign in</button>
+            <button id="signout-button">Sign out</button>
         </div>
         <pre id="output"></pre>
 
