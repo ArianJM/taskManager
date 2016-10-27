@@ -9,8 +9,8 @@ const apiKey = 'AIzaSyDRUtCdJkJ3ARwzSfmpVxyH_0XUxAKxX8g';
 // View the files in your Google Drive
 const scope = 'https://www.googleapis.com/auth/drive.readonly';
 
-const signinButton = document.getElementById('signin-button');
-const signoutButton = document.getElementById('signout-button');
+const $signinButton = $('signin-button');
+const $signoutButton = $('signout-button');
 
 /**
     Gets the file.
@@ -42,25 +42,14 @@ function getFile(id = '1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
 */
 function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
-        signinButton.style.display = 'none';
-        signoutButton.style.display = 'block';
+        $signinButton.style.display = 'none';
+        $signoutButton.style.display = 'block';
         getFile();
     }
     else {
-        signinButton.style.display = 'block';
-        signoutButton.style.display = 'none';
+        $signinButton.style.display = 'block';
+        $signoutButton.style.display = 'none';
     }
-}
-
-function handleSignoutClick(event) {
-    gapi.auth2.getAuthInstance().signOut().then(() => updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()));
-}
-
-function handleSigninClick(event) {
-    gapi.auth2.getAuthInstance().signIn().then(() => {
-        getFile();
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-    });
 }
 
 /**
@@ -81,8 +70,15 @@ function initAuth() {
         // Handle the initial sign-in state.
         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 
-        signinButton.addEventListener("click", handleSigninClick);
-        signoutButton.addEventListener("click", handleSignoutClick);
+        $signinButton.click(() => {
+            gapi.auth2.getAuthInstance().signIn().then(() => {
+                getFile();
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            });
+        });
+        $signoutButton.click(() => {
+            gapi.auth2.getAuthInstance().signOut().then(() => updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()));
+        });
     });
 }
 
