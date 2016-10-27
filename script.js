@@ -18,7 +18,7 @@ let $signoutButton = null;
     @param {String} [id='1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM'] The id of the file to retrieve.
     @return {void}
 */
-function getFile(id = '1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM') {
+function getFile(id = '1CQ6udndHxaDytqub9oGRvppw97FSpYYusnE8SBY9Ixk') {
     const user = gapi.auth2.getAuthInstance().currentUser.get();
     const oauthToken = user.getAuthResponse().access_token;
     const requestUrl = `https://www.googleapis.com/drive/v3/files/${id}/export?mimeType=text/csv&access_token=${oauthToken}`;
