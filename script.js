@@ -9,8 +9,8 @@ const apiKey = 'AIzaSyDRUtCdJkJ3ARwzSfmpVxyH_0XUxAKxX8g';
 // View the files in your Google Drive
 const scope = 'https://www.googleapis.com/auth/drive.readonly';
 
-const $signinButton = $('signin-button');
-const $signoutButton = $('signout-button');
+let $signinButton = null;
+let $signoutButton = null;
 
 /**
     Gets the file.
@@ -58,6 +58,8 @@ function updateSigninStatus(isSignedIn) {
     @return {void}
 */
 function initAuth() {
+    $signinButton = $('signin-button');
+    $signoutButton = $('signout-button');
     gapi.client.setApiKey(apiKey);
     gapi.auth2.init({
         client_id: clientId,        // eslint-disable-line camelcase
