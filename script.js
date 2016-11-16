@@ -1,4 +1,4 @@
-/* global gapi */
+/* global gapi, Acuerdo */
 'use strict';
 
 // Your Client ID can be retrieved from your project in the Google
@@ -11,6 +11,8 @@ const scopes = [ 'https://www.googleapis.com/auth/spreadsheets.readonly' ];
 
 let $signinButton = null;
 let $signoutButton = null;
+
+$.getScript('Acuerdo.js');
 
 /**
     Updates the signin status. Shows or removes the buttons.
@@ -28,6 +30,8 @@ function updateSigninStatus(isSignedIn) {
         $signoutButton.hide();
     }
 }
+
+const acuerdosTemporales = [];
 
 /**
     Get all the agreements.
@@ -56,6 +60,9 @@ function getAgreements() {
                 const email = row[3];
                 const urgencia = row[4];
                 const comentarios = row[5];
+                const acuerdo = new Acuerdo(index, responsable, decision, fecha, email, urgencia, comentarios);
+
+                acuerdosTemporales.push(acuerdo);
 
                 html += `<tr>
     <td>${index}</td>
