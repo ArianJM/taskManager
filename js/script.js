@@ -12,7 +12,7 @@ const scopes = [ 'https://www.googleapis.com/auth/spreadsheets.readonly' ];
 let $signinButton = null;
 let $signoutButton = null;
 
-$.getScript('Acuerdo.js');
+$.getScript('js/Acuerdo.js');
 
 /**
     Updates the signin status. Shows or removes the buttons.
@@ -39,8 +39,8 @@ const acuerdosTemporales = [];
     @return {void}
 */
 function getAgreements() {
-    const $table = $('table#agreements');
-    const $tbody = $('#agreements tbody');
+    const $table = $('table#acuerdos');
+    const $tbody = $('#acuerdos tbody');
     const $errorDiv = $('div#error-div');
 
     gapi.client.sheets.spreadsheets.values.get({
@@ -50,8 +50,6 @@ function getAgreements() {
         const range = response.result;
 
         if (range.values.length > 0) {
-            let html = '';
-
             for (let index = 0; index < range.values.length; index++) {
                 const row = range.values[index];
                 const responsable = row[0];
@@ -64,18 +62,17 @@ function getAgreements() {
 
                 acuerdosTemporales.push(acuerdo);
 
-                html += `<tr>
-    <td>${index}</td>
-    <td>${responsable}</td>
-    <td>${decision}</td>
-    <td>${fecha}</td>
-    <td>${email}</td>
-    <td>${urgencia}</td>
-    <td>${comentarios}</td>
-</tr>\n`;
+                $tbody.append(acuerdo.getHTML());
+                $(acuerdo.getSelector().main).click(() => {
+                    if (acuerdo.isExpanded) {
+                        acuerdo.hideDetails();
+                    }
+                    else {
+                        acuerdo.showDetails();
+                    }
+                });
             }
             $table.show();
-            $tbody.html(html);
             $table.DataTable();         // eslint-disable-line new-cap
         }
         else {
@@ -85,6 +82,16 @@ function getAgreements() {
     }, response => {
         $errorDiv.show().html(`Error: ${response.result.error.message}`);
     });
+
+
+    // const values = [ [ ], [ 'Holaa' ] ];
+    //
+    // gapi.client.sheets.spreadsheets.values.update({ spreadsheetId: '1SHx9uEXfIjOqvyMKN9TC1_jTjnTbogCu64VPcyuF_XM',
+    //                                                 range: 'A1',
+    //                                                 valueInputOption: 'RAW',
+    //                                                 values }).then(response => {
+    //                                                     console.log(response.body);
+    //                                                 });
 }
 
 /**
