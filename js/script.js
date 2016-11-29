@@ -63,13 +63,8 @@ function getAgreements() {
                 acuerdosTemporales.push(acuerdo);
 
                 $tbody.append(acuerdo.getHTML());
-                $(acuerdo.getSelector().main).click(() => {
-                    if (acuerdo.isExpanded) {
-                        acuerdo.hideDetails();
-                    }
-                    else {
-                        acuerdo.showDetails();
-                    }
+                $(acuerdo.getSelectors().main).click(() => {
+                    acuerdo.showDetails();
                 });
             }
             $table.show();

@@ -9,31 +9,3 @@
 tr.acuerdo-fila-content {
     display: none;
 }
-
-input.identificador {
-    width: 50px;
-}
-
-input.responsable {
-    width: 50px;
-}
-
-input.decision {
-    width: 50px;
-}
-
-input.fecha {
-    width: 50px;
-}
-
-input.email {
-    width: 50px;
-}
-
-input.urgencia {
-    width: 50px;
-}
-
-input.comentarios {
-    width: 50px;
-}

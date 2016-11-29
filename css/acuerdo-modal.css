@@ -1,0 +1,34 @@
+div.modal {
+    display: none;
+}
+
+div#acuerdo-modal {
+    display: inline-block;
+}
+
+h3.modal-first-row-titles {
+    display: inline-block;
+    font-size: 1.2em;
+    margin-right: 5%;
+    position: relative;
+}
+
+.modal-fecha {
+    margin-right: 0px;
+}
+
+div.modal-fourth-row {
+    margin-top: 20px;
+}
+
+button.modal-cancel {
+    display: none;
+}
+
+button.modal-complete {
+    float: right;
+}
+
+.modal-input {
+    display: none;
+}
