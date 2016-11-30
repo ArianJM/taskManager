@@ -1,4 +1,16 @@
 <section class="page-header">
-    <h1 class="project-name">Taskmanager</h1>
-    <h2 class="project-tagline">Manages tasks</h2>
+    <div class="login">
+        <div id="authorize-div">
+            <!--Button for the user to click to initiate auth sequence -->
+            <button id="signin-button" class="authorize-button">Sign in</button>
+            <button id="signout-button" class="authorize-button">Sign out</button>
+            <script>
+                $('button.authorize-button').button();
+            </script>
+        </div>
+    </div>
+    <div>
+        <h1 class="project-name">Taskmanager</h1>
+        <h2 class="project-tagline">Manages tasks</h2>
+    </div>
 </section>

@@ -139,15 +139,7 @@ class Acuerdo {
         }
 
         selectors.modalEditButton.click(() => {
-            selectors.modalText.hide();
-            selectors.modalInput.show();
-
-            selectors.responsableInput.attr('placeholder', this.responsable);
-            selectors.emailInput.attr('placeholder', this.email);
-            selectors.urgenciaInput.attr('placeholder', this.urgencia);
-            selectors.fechaInput.attr('placeholder', this.fecha);
-            selectors.decisionInput.attr('placeholder', this.decision);
-            selectors.comentariosInput.attr('placeholder', this.comentarios);
+            document.location.href = `editar-acuerdo.html?acuerdoId=${this.id}`;
         });
     }
 }

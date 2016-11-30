@@ -61,15 +61,15 @@ a {
 
 @media screen and (min-width: 64em) {
   .page-header {
-    padding: 5rem 6rem; } }
+    padding-bottom: 1rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
   .page-header {
-    padding: 3rem 4rem; } }
+    padding-bottom: 1rem; } }
 
 @media screen and (max-width: 42em) {
   .page-header {
-    padding: 2rem 1rem; } }
+    padding-bottom: 1rem; } }
 
 .project-name {
   margin-top: 0;
@@ -243,3 +243,14 @@ a {
 @media screen and (max-width: 42em) {
   .site-footer {
     font-size: 0.9rem; } }
+
+/* ARIANJM */
+button.authorize-button {
+    background: transparent;
+    border: none;
+    float: right;
+}
+
+div.login {
+    overflow: hidden;
+}
